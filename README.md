@@ -27,7 +27,7 @@ Hello World?
 ```
 
 ```
-[root@localhost mymodule]# python3.6
+[username@localhost mymodule]# python3.6
 Python 3.6.5 (default, Apr 10 2018, 17:08:37)
 [GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -39,3 +39,20 @@ Hello World?
 ```
 
 And my imported function runs in both cases, but I can't help but think I am doing my import wrong somehow. There must be a way to do a simple relative import that works properly for both pip installed code and code that I run directly.
+
+And if I just try a plain `from otherfile import some_func` it works fine for `python3.6 mymodule/main.py` but when i try it from the pip installed module, I get:
+
+```
+[username@localhost mymodule]# python3.6
+Python 3.6.5 (default, Apr 10 2018, 17:08:37)
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import mymodule
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/testuser/src/mymodule/mymodule/__init__.py", line 1, in <module>
+    from .main import run_me
+  File "/home/testuser/src/mymodule/mymodule/main.py", line 3, in <module>
+    from otherfile import some_func
+ModuleNotFoundError: No module named 'otherfile'
+```
